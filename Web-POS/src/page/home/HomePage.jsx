@@ -9,9 +9,9 @@ function HomePage() {
 
   const getList = async () => {
     const res = await request("home", "get");
-    if(res){
-      setHome(res.list)
-    }
+    // if(res){
+    //   setHome(res.list)
+    // }
   };
 
   return (

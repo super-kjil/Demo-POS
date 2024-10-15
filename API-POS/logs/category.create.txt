@@ -1,3 +1,25 @@
 Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
 Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
 Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near '' at line 1
+Error: Column 'name' cannot be null
+Error: Column 'name' cannot be null
+Error: Column 'name' cannot be null
+Error: Column 'name' cannot be null
+Error: Column 'name' cannot be null
+Error: Column 'name' cannot be null
+Error: Column 'name' cannot be null
+Error: Column 'name' cannot be null
+Error: Column 'name' cannot be null
+Error: Column 'name' cannot be null
+Error: Column 'name' cannot be null
+Error: Column 'name' cannot be null
+Error: Column 'name' cannot be null
+Error: Column 'name' cannot be null
+Error: Column 'name' cannot be null
+Error: Column 'name' cannot be null
+Error: Column 'name' cannot be null
+Error: Column 'name' cannot be null
+Error: Column 'Name' cannot be null
+Error: Column 'Name' cannot be null
+Error: Incorrect integer value: '' for column 'Status' at row 1
+Error: Incorrect integer value: '' for column 'Status' at row 1
