@@ -1,9 +1,10 @@
 import React, { useEffect, useState } from 'react'
 import { request } from '../../util/helper'
-import {Button, Table, Tag, Space, Modal, Input, Descriptions,Form, Select,} from "antd"
+import {Button, Table, Tag, Space, Modal, Input,Form, Select, message, } from "antd"
 import { MdDelete, MdEdit, MdAdd  } from "react-icons/md";
 
 function CategoryPage() {
+  const [formRef] = Form.useForm()
   const [list, setList] = useState([]);
   useEffect(() => {
     getList()
@@ -23,22 +24,37 @@ function CategoryPage() {
     parentId : null,
   })
   const onClickEdit = (data,index) => {
-    setState ({
+    setState({
       ...state,
-      visibleModal : true,
-      id : data.Id,
-      name : data.Name,
-      description : data.Description,
-      status : data.Status, 
-    })
+      visibleModal: true,
+    });
+    formRef.setFieldsValue({
+      Id: data.Id, // hiden id (save? | update?)
+      Name: data.Name,
+      Description: data.Description,
+      Status: data.Status,
+    });
     //console.log(data);
   }
   const onClickDelete = async (data, index) => {
-    const res = await request ("category" , "delete", {
-      Id : data.Id,
-    })
-    console.log(data);
-  }
+    Modal.confirm({
+      title : "Delete!",
+      description : "Are you sure to delete?",
+      okType : "Yes",
+      onOk: async () => {
+        const res = await request ("category" , "delete", {
+          Id : data.Id,
+        });
+        //console.log(data);
+        if (res && !res.error) {
+          const newList = list.filter((item) => item.Id != data.Id);
+          setList(newList);
+          message.success(res.message)
+        }
+      }
+    })     
+  };
+  
   const onclickAddbtn = () => {
     setState({
       ...state,
@@ -46,6 +62,7 @@ function CategoryPage() {
     })
   }
   const oncloseModal = () => {
+    formRef.resetFields();
     setState({
       ...state,
       id : null,
@@ -67,46 +84,47 @@ function CategoryPage() {
       const res = await request("category", "put", data);
     }
   } 
-  const onFinish = (items) => {
-    console.log(JSON.stringify(items))
+  const onFinish = async (items) => {
+    var data = {
+      Id : formRef.getFieldValue("Id"), 
+      Name : items.Name,
+      Description : items.Description,
+      Status : items.Status,
+      ParentId : items.ParentId
+    };
+    var method = "post";
+    if (formRef.getFieldValue("Id")) {
+      method = "put";
+    }
+    const res = await request("category", method, data);
+    if (res && !res.error) {
+        message.success(res.message);
+        getList();
+        oncloseModal();
+    }
+
+    //alert(JSON.stringify(res))
+
+
   }
   return (
     <div>
       <Button type='primary' icon={<MdAdd/>}
       onClick={onclickAddbtn}
+      style={{marginBottom:10}}
       >
-      Add New
+      New
       </Button>
       <Modal  
         open={state.visibleModal}
-        title="Add New Category"
+        title= {formRef.getFieldValue("Id") ? "Edit Category" : "New Category"}
         footer={null}
         onCancel={oncloseModal}
         >
-       {/* <Input placeholder='Name'
-       value={state.name}
-          onChange={(e) => setState({
-            ...state,
-            name : e.target.value,
-          })}
-       />
-       <Input placeholder='Descriptions'
-       value={state.description}
-        onChange={(e) => setState({
-          ...state,
-          description : e.target.value
-        })}
-       />
-       <Input placeholder='Status'
-       value={state.status}
-        onChange={(e) => setState({
-          ...state,
-          status : e.target.value
-        })}
-       /> */}
           <Form 
             layout='vertical'
             onFinish={onFinish}
+            form = {formRef}
           >
             <Form.Item name={"Name"} label="Category Name">
               <Input placeholder='Input Category Name'/>
@@ -130,7 +148,9 @@ function CategoryPage() {
             </Form.Item>
             <Space>
               <Button danger>Cancel</Button>
-              <Button type="primary" htmlType='submit'>Save</Button>
+              <Button type="primary" htmlType='submit'>
+                {formRef.getFieldValue("Id") ? "Update" : "Save"}
+              </Button>
           </Space>
           </Form>
           
@@ -141,7 +161,7 @@ function CategoryPage() {
           {
             key: "No",
             title: "No",
-            render : (index) => index++,
+            render : (index) => index + 1,
           },
           {
             key: "Name",

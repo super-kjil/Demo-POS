@@ -6,3 +6,4 @@ create index.js
 > npm install cors
 > npm install mysql2
 > npm install nodemon
+> npm i bcrypt

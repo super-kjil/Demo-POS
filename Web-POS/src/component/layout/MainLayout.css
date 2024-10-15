@@ -4,6 +4,8 @@
     display: flex;
     justify-content: space-between;
     padding: 5px 10px;
+    align-items: center;
+
 }
 
 .admin-header-g1 {
@@ -53,6 +55,7 @@
 
 
 .admin-body {
-    padding: 0;
-    height: calc(100vh - 100px);
+    padding: 16px;
+    height: calc(100vh - 110px);
+    overflow-y: scroll;
 }

@@ -3,8 +3,9 @@ const {db,toInt, logError } = require ("../util/helper")
 
 exports.getList = async (req,res) => {
     try {
-        const [list] = await db.query("SELECT * FROM category");
+        const [list] = await db.query("SELECT * FROM category ORDER BY Id DESC");
     res.json({
+        i_know_you_are_id: req.current_id,
         list: list,
     })
     }catch(error){
@@ -21,7 +22,9 @@ exports.create = async (req,res) => {
             ParentId : req.body.ParentId,
          })
         res.json({
-            data: data,
+            data: data,            
+            message : "Insert Success!"
+
         })
     }
     catch(error){

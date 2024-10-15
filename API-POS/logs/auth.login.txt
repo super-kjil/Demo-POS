@@ -1,0 +1,3 @@
+ReferenceError: password is not defined
+ReferenceError: password is not defined
+Error: secretOrPrivateKey is not valid key material
