@@ -8,7 +8,7 @@ const {
     
 module.exports = (app) => {
     app.get("/api/category",validate_token(),getList);
-    app.post("/api/category",validate_token(),create);
-    app.put("/api/category",validate_token(),update);
-    app.delete("/api/category",validate_token(),remove);
+    app.post("/api/category",create);
+    app.put("/api/category",update);
+    app.delete("/api/category",remove);
 };

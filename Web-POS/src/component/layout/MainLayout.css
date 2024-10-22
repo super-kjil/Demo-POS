@@ -53,9 +53,13 @@
     margin-right: 15px;     
 }
 
-
+.content-body {
+    background-color: gray;
+    margin: '0 16px',
+}
 .admin-body {
     padding: 16px;
     height: calc(100vh - 110px);
     overflow-y: scroll;
+    background-color: gray;
 }

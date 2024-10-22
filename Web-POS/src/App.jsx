@@ -1,5 +1,5 @@
 
-//import './App.css'
+import './App.css'
 import {BrowserRouter,Routes,Route} from "react-router-dom"
 import HomePage from './page/home/HomePage'
 import LoginPage from "./page/auth/LoginPage"
@@ -9,6 +9,9 @@ import MainLayoutAuth from './component/layout/MainLayoutAuth'
 import EmployeePage from "./page/employee/EmployeePage"
 import CustomerPage from "./page/customer/CustomerPage"
 import CategoryPage from "./page/category/CategoryPage"
+import RolePage from "./page/role/RolePage"
+import UserPage from "./page/user/UserPage"
+import SupplierPage from './page/purchase/SupplierPage'
 
 function App() {
 
@@ -22,6 +25,10 @@ function App() {
             <Route path='/employee' element={<EmployeePage/>}/>
             <Route path='/customer' element={<CustomerPage/>}/>
             <Route path='/category' element={<CategoryPage/>}/>
+            <Route path='/role' element={<RolePage/>}/>
+            <Route path='/supplier' element={<SupplierPage/>}/>
+            {/* <Route path='/role' element={<RolePage/>}/> */}
+            <Route path='/user' element={<UserPage/>}/>
             <Route path='*' element={<h1>404-Route Not Found!</h1>}/>
           </Route>
           

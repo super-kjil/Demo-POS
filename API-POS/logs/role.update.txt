@@ -1,0 +1,2 @@
+Error: Unknown column 'code' in 'field list'
+Error: Unknown column 'code' in 'field list'

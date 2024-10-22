@@ -1,0 +1,9 @@
+TypeError: Cannot read properties of undefined (reading 'name')
+TypeError: Cannot read properties of undefined (reading 'name')
+Error: Column 'name' cannot be null
+Error: Column 'name' cannot be null
+Error: Duplicate entry '09876543' for key 'supplier.tel'
+Error: Duplicate entry '09876543' for key 'supplier.tel'
+Error: Duplicate entry '09876543' for key 'supplier.tel'
+Error: Duplicate entry '09876543' for key 'supplier.tel'
+Error: Duplicate entry '09876543' for key 'supplier.tel'

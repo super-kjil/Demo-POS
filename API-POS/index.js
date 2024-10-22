@@ -125,10 +125,9 @@ app.get("/api/home", (req, res) => {
 });
 
 require("./src/route/category.route")(app)
-
 require("./src/route/auth.route")(app)
-
-//require("./src/route/auth.route")(app);require("./src/route/role.route")(app);
+require("./src/route/role.route")(app);
+require("./src/route/supplier.route")(app);
 
 const PORT = 8081;
 app.listen(PORT, () => {

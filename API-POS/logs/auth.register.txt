@@ -1,1 +1,76 @@
 Error: You have an error in your SQL syntax; check the manual that corresponds to your MySQL server version for the right syntax to use near 'user (role_id,name,username,password,is_active,create_by) VALUES (1,'Admin','adm' at line 1
+Error: data and salt arguments required
+Error: data and salt arguments required
+Error: data and salt arguments required
+Error: data and salt arguments required
+Error: data and salt arguments required
+Error: Duplicate entry 'admin02@gmial.com' for key 'user.username'
+Error: Duplicate entry 'admin02@gmial.com' for key 'user.username'
+Error: Duplicate entry 'admin02@gmial.com' for key 'user.username'
+Error: Duplicate entry 'admin02@gmial.com' for key 'user.username'
+Error: Duplicate entry 'admin02@gmial.com' for key 'user.username'
+Error: Duplicate entry 'admin02@gmial.com' for key 'user.username'
+Error: Duplicate entry 'admin02@gmial.com' for key 'user.username'
+Error: data and salt arguments required
+Error: data and salt arguments required
+Error: data and salt arguments required
+Error: data and salt arguments required
+Error: data and salt arguments required
+Error: data and salt arguments required
+Error: data and salt arguments required
+Error: Duplicate entry 'admin02@gmial.com' for key 'user.username'
+Error: Column 'role_id' cannot be null
+Error: Column 'role_id' cannot be null
+Error: Column 'role_id' cannot be null
+Error: Column 'role_id' cannot be null
+Error: Column 'role_id' cannot be null
+Error: Column 'role_id' cannot be null
+Error: Column 'role_id' cannot be null
+Error: Column 'role_id' cannot be null
+Error: Column 'role_id' cannot be null
+Error: Column 'role_id' cannot be null
+Error: Column 'role_id' cannot be null
+Error: Column 'role_id' cannot be null
+Error: Column 'role_id' cannot be null
+Error: Column 'role_id' cannot be null
+Error: Column 'role_id' cannot be null
+Error: Column 'role_id' cannot be null
+Error: Column 'role_id' cannot be null
+Error: Column 'role_id' cannot be null
+Error: Column 'role_id' cannot be null
+Error: Column 'role_id' cannot be null
+Error: Column 'role_id' cannot be null
+Error: Column 'role_id' cannot be null
+Error: Column 'role_id' cannot be null
+Error: Column 'role_id' cannot be null
+Error: Column 'role_id' cannot be null
+Error: data and salt arguments required
+Error: data and salt arguments required
+Error: data and salt arguments required
+Error: data and salt arguments required
+Error: data and salt arguments required
+Error: data and salt arguments required
+Error: data and salt arguments required
+Error: data and salt arguments required
+Error: data and salt arguments required
+Error: data and salt arguments required
+Error: data and salt arguments required
+Error: data and salt arguments required
+Error: data and salt arguments required
+Error: data and salt arguments required
+Error: data and salt arguments required
+Error: data and salt arguments required
+Error: data and salt arguments required
+Error: data and salt arguments required
+Error: data and salt arguments required
+Error: data and salt arguments required
+Error: data and salt arguments required
+Error: data and salt arguments required
+Error: data and salt arguments required
+Error: data and salt arguments required
+Error: data and salt arguments required
+Error: data and salt arguments required
+Error: data and salt arguments required
+Error: data and salt arguments required
+Error: data and salt arguments required
+Error: data and salt arguments required

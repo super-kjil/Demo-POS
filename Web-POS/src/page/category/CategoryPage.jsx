@@ -1,27 +1,33 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import { request } from '../../util/helper'
 import {Button, Table, Tag, Space, Modal, Input,Form, Select, message, } from "antd"
 import { MdDelete, MdEdit, MdAdd  } from "react-icons/md";
-
+import MainPage from "../../component/layout/MainPage"
 function CategoryPage() {
   const [formRef] = Form.useForm()
   const [list, setList] = useState([]);
+  const [loading, setLoading] = useState(false);
+
   useEffect(() => {
     getList()
   },[])
+
   const getList = async () => {
-    const res = await request ("category",)
+    setLoading(true)
+    const res = await request ("category","get")
+    setLoading(false)
     if (res) {
+      
       setList(res.list)
     }
   }
   const [state, setState] = useState({
     visibleModal : false,
-    id : null,
-    name : "",
-    description : "",
-    status : "",
-    parentId : null,
+    // id : null,
+    // name : "",
+    // description : "",
+    // status : "",
+    // parentId : null,
   })
   const onClickEdit = (data,index) => {
     setState({
@@ -69,21 +75,6 @@ function CategoryPage() {
       visibleModal: false,
     })
   }
-  const onSave = async () => {
-    var data = {
-      Id: state.id,
-      Name : state.name,
-      Description : state.description,
-      Status : state.status,
-      ParentId : state.parentId
-    };
-    if(state.id == null){
-      const res = await request("category", "post", data);
-
-    }else {
-      const res = await request("category", "put", data);
-    }
-  } 
   const onFinish = async (items) => {
     var data = {
       Id : formRef.getFieldValue("Id"), 
@@ -108,7 +99,7 @@ function CategoryPage() {
 
   }
   return (
-    <div>
+    <MainPage loading={loading}>
       <Button type='primary' icon={<MdAdd/>}
       onClick={onclickAddbtn}
       style={{marginBottom:10}}
@@ -159,9 +150,12 @@ function CategoryPage() {
         dataSource={list}
         columns={[
           {
+            // key: "No",
+            // title: "No",
+            // render : (index) => index + 1,
             key: "No",
             title: "No",
-            render : (index) => index + 1,
+            render: (item, data, index) => index + 1,
           },
           {
             key: "Name",
@@ -190,18 +184,23 @@ function CategoryPage() {
                   type='primary' 
                   icon={<MdEdit/>}
                   onClick={() =>onClickEdit(data,index)}
-                />
+                >
+                  Edit
+                </Button>
+                  
                 <Button 
                   type='primary' 
                   danger icon={<MdDelete/>}
                   onClick={() => onClickDelete(data,index)}
-                />            
+                > 
+                Delete 
+                </Button>           
               </Space>
             )
           },
         ]}
       />
-    </div>
+    </MainPage>
   )
 }
 
