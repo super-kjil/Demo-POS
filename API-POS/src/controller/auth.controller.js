@@ -5,7 +5,24 @@ const config = require("../util/config");
 
 exports.getList = async (req,res) => {
     try {
-
+      let sql =
+      " SELECT  " +
+      " u.id, " +
+      " u.name, " +
+      " u.username, " +
+      " u.create_by, " +
+      " u.is_active, " +
+      " r.name AS role_name " +
+      " FROM user u " +
+      " INNER JOIN role r ON u.role_id = r.id ";
+    const [list] = await db.query(sql);
+    const [role] = await db.query(
+      "SELECT id as value, name as label FROM role"
+    );
+    res.json({
+      list,
+      role,
+    });
     } catch (error) {
         logError("auth.getList",error ,res);
     } 
@@ -22,12 +39,13 @@ exports.register = async (req,res) => {
           " user ( role_id, name, username, password, is_active, create_by) VALUES " +
           " (:role_id,:name,:username,:password,:is_active,:create_by); ";
         let data = await db.query(sql, {
+          id: req.body.id,
           role_id: req.body.role_id,
           name: req.body.name,
           username: req.body.username,
           password: password,
           is_active: req.body.is_active,
-          create_by: req.auth?.name, // current user that action this module
+          create_by: req.profile?.name, // current user that action this module
         });
         res.json({
           message: "Create new account success!",
@@ -42,7 +60,13 @@ exports.register = async (req,res) => {
 exports.login = async (req,res) => {
   let { password, username } = req.body;
     try {
-        let sql = "SELECT * FROM user WHERE username=:username"
+      let sql =
+      "SELECT " +
+      " u.*," +
+      " r.name as role_name" +
+      " FROM user u " +
+      " INNER JOIN role r ON u.role_id = r.id " +
+      " WHERE u.username=:username ";
         let [data] = await db.query(sql, {
           username:username,
         })
@@ -64,6 +88,7 @@ exports.login = async (req,res) => {
             })
           }
           else { 
+          delete  data[0].password;
           let obj = {
             profile : data[0],
             permision : ["Read", "Wite"]
@@ -96,24 +121,43 @@ exports.profile = async (req,res) => {
     } 
 };
 
-const getAccessToken = async (paramData) => {
-    
-    const access_token = await jwt.sign(
-      {data:paramData},
-      config.config.token.access_token_key,
-      {expiresIn:"5m"})
-    return access_token;
-  
-  
-    // const acess_token = await jwt.sign(
-    //   { data: paramData },
-    //   config.config.token.access_token_key
-    //   // {
-    //   //   expiresIn: "1d",
-    //   // }
-    // );
-    // return acess_token;
-  };
+exports.update = async (req,res) => {
+  try {
+    //role_id name username password is_active 
+      var sql = "UPDATE user SET role_id:=role_id,name:=name,username:=username,password:=password,is_active:=is_active, WHERE Id=:Id ";     
+      const [data] = await db.query(sql, {
+        role_id : req.body.role_id,
+        name : req.body.name,
+        username : req.body.username,
+        password : req.body.password,
+        is_active : req.body.is_active,
+       })
+      res.json({
+          data: data,
+          message : "Data Update Success!"
+      })
+  }
+  catch(error){
+      logError("user.update",error,res);
+  }
+};
+
+exports.remove = async (req,res) => {
+  try {
+      var sql = "DELETE FROM user WHERE id = :id";     
+      const [data] = await db.query(sql, {
+          id : req.body.id,
+       })
+      res.json({
+          data: data,
+          message : "Data Delete Success!"
+      })
+  }
+  catch(error){
+      logError("user.remove",error,res);
+  }
+};
+
 exports.validate_token = () => {
     // call in midleware in route (role route, user route, teacher route)
   return (req, res, next) => {
@@ -151,3 +195,21 @@ exports.validate_token = () => {
   };
 };
 
+const getAccessToken = async (paramData) => {
+    
+  const access_token = await jwt.sign(
+    {data:paramData},
+    config.config.token.access_token_key,
+    {expiresIn:"1d"})
+  return access_token;
+
+
+  // const acess_token = await jwt.sign(
+  //   { data: paramData },
+  //   config.config.token.access_token_key
+  //   // {
+  //   //   expiresIn: "1d",
+  //   // }
+  // );
+  // return acess_token;
+};
